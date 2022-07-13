@@ -1,0 +1,217 @@
+MDScreen:
+   name: "mainScreen"
+
+   ProfileWindow:
+<ProfileWindow>:
+   name: 'Profile'
+
+   #########################
+   #Сосздание переменных для обмена
+   #########################
+   kv_text_read: text_read
+   kv_button_read: button_read
+   kv_label_map_read: label_map_read
+   kv_label_data_read: label_data_read
+
+   kv_text_write: text_write
+   kv_text_map_write: text_map_write
+   kv_text_data_write: text_data_write
+   kv_button_write: button_write
+   kv_label_update: label_update
+   kv_button_write_2: button_write_2
+
+   kv_name_server_db: name_server_db
+   kv_button_server: button_server
+   kv_button_exp_csv: button_exp_csv
+   kv_button_inp_csv: button_inp_csv
+
+   MDBoxLayout:
+      orientation: 'vertical'
+      
+      MDToolbar:
+         left_action_item: [["magnify", lambda x:None]]
+         MDLabel:
+
+            text: 'E-manometr'
+#            font_name:"Montserrat"
+      MDBottomNavigation:
+         MDBottomNavigationItem:
+            icon: "gauge"
+            text: "manom"
+            name: "gauge"
+            MDScreen:
+               ScrollView:
+                  bar_width: 0
+                  MDBoxLayout:
+                     orientation: 'vertical'
+                     padding: '20dp'
+#                     adaptive_height: True
+                     MDLabel:
+                        text: 'Данные по манометрам'
+                        halign: 'center'
+                        font_style: "H6"
+                        adeptive_height: True
+                     MDLabel:
+                        text: 'Серийный номер:'
+                        halign: 'center'
+                        font_style: "Body1"
+                        adeptive_height: True
+                     TextInput:
+                        id: text_read
+                        text: ''
+                        multiline: False
+                        font_style: "H2"
+                        halign: "center"
+                        size_hint_y: .5
+
+                     Button:
+                        id: button_read
+                        text: 'Поиск'
+                        font_style: "H2"
+                        #halign: "center"
+#                        pos_hint: {'right': 1}
+                        size_hint_y: .5
+                        on_release:
+                           root.change_manom()
+
+                     MDLabel:
+                        id: label_map_read
+                        text: 'Место установки'
+                        font_style: "H6"
+                        halign: "center"
+                        adeptive_height: True
+
+                     MDLabel:
+                        id: label_data_read
+                        text: 'Дата установки'
+                        font_style: "H6"
+                        halign: "center"
+                        adeptive_height: True
+   
+         MDBottomNavigationItem:
+            icon: "pencil"
+            text: "conf"
+            name: "pencil"
+#            on_release:
+#               scr.current = "home"
+            MDScreen:
+               ScrollView:
+                  bar_width: 0
+                  MDBoxLayout:
+                     orientation: 'vertical'
+                     padding: '20dp'
+#                     adaptive_height: True
+                     MDLabel:
+                        text: 'Запись данных по манометрам'
+                        font_style: "H6"
+                        halign: "center"
+                        adeptive_height: True
+
+                     TextInput:
+                        id: text_write
+                        text: 'Серийный номер'
+                        multiline: False
+                        font_style: "H2"
+                        halign: "center"
+                        adeptive_height: True
+#                        on_focus: if self.focus: self.text = ""
+                        
+                     TextInput:
+                        id: text_map_write
+                        text: 'Место установки'
+                        multiline: False
+                        font_style: "H6"
+                        halign: "center"
+                        adeptive_height: True
+#                        on_focus: if self.focus: self.text = ""
+
+                     TextInput:
+                        id: text_data_write
+                        text: 'Дата установки'
+                        multiline: False
+                        font_style: "H6"
+                        halign: "center"
+                        adeptive_height: True
+#                        on_focus: if self.focus: self.text = ""
+
+                     Button:
+                        id: button_write
+                        text: 'Записать'
+                        font_style: "H2"
+                        halign: "center"
+#                        pos_hint: {'right': 1}
+                        adeptive_height: True
+                        on_release:
+                           root.change_conf()
+
+                     MDLabel:
+                        id: label_update
+                        text: ''
+                        font_style: "H6"
+                        halign: "center"
+                        adeptive_height: True
+
+                     Button:
+                        id: button_write_2
+                        size_hint_y: 0.0001
+ #                       size_hint: None, None
+ #                       size: dp(0), dp(0)
+                        text: ''
+                        font_style: "Caption"
+                        halign: "center"
+                        adeptive_height: True
+
+                        on_release:
+                           root.change_conf_2()
+         
+         MDBottomNavigationItem:
+            icon: "information"
+            text: "info"
+            name: "info"
+            MDScreen:
+               ScrollView:
+                  bar_width: 0
+                  MDBoxLayout:
+                     orientation: 'vertical'
+                     padding: '20dp'
+#                     adaptive_height: True
+                     MDLabel:
+                        text: 'Информация'
+                        halign: 'center'
+                        font_style: "H6"
+                        adeptive_height: True
+                     TextInput:
+                        id: name_server_db
+                        text: 'localhost'
+                        font_style: "H2"
+                        halign: "center"
+                        size_hint_y: .3
+
+                     Button:
+                        id: button_server
+                        text: 'Соедениться'
+                        font_style: "H2"
+                        #halign: "center"
+#                        pos_hint: {'right': 1}
+                        size_hint_y: .3
+                        on_release:
+                           root.change_server()
+                     Button:
+                        id: button_exp_csv
+                        text: 'Экспорт csv на сервере'
+                        font_style: "H2"
+                        #halign: "center"
+#                        pos_hint: {'right': 1}
+                        size_hint_y: .3
+                        on_release:
+                           root.change_exp_csv()
+
+                     Button:
+                        id: button_inp_csv
+                        text: 'Импорт csv из локального файла'
+                        font_style: "H2"
+                        #halign: "center"
+#                        pos_hint: {'right': 1}
+                        size_hint_y: .3
+                        on_release:
+                           root.change_inp_csv()
